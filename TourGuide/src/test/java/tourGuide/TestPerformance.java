@@ -96,5 +96,7 @@ public class TestPerformance {
 		System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds."); 
 		assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
-	
+	// je regarde grabble
+	// je lance le projet ( le projet compile tout de suite )
+
 }
