@@ -1,0 +1,31 @@
+image: gradle:jdk8
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+build:
+  stage: build
+  script: gradle assemble
+
+test:
+  stage: test
+  script: gradle test
+
+deploy:
+  stage: deploy
+  script: echo "Deploying..."
+  environment:
+    name: production
+    url: http://your-production-url
+  only:
+    - master
