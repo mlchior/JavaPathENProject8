@@ -1,7 +1,10 @@
 package tourGuide;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import gpsUtil.location.Attraction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +46,11 @@ public class TourGuideController {
     @RequestMapping("/getNearbyAttractions") 
     public String getNearbyAttractions(@RequestParam String userName) {
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-    	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
+
+        List<Attraction> attractions = tourGuideService.getNearByAttractions(visitedLocation);
+        Map<String, Object> response = new HashMap<>();
+        response.put("attractions", attractions);
+    	return JsonStream.serialize(response);
     }
     
     @RequestMapping("/getRewards") 
@@ -62,8 +69,14 @@ public class TourGuideController {
     	//        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371} 
     	//        ...
     	//     }
-    	
-    	return JsonStream.serialize("");
+        List<User> users = tourGuideService.getAllUsers();
+        Map<String, Object> response = new HashMap<>();
+        for (User user : users) {
+            VisitedLocation visitedLocation = tourGuideService.getUserMostRecentLocation(user);
+            response.put(user.getUserId().toString(), visitedLocation);
+        }
+        return JsonStream.serialize(response);
+
     }
     
     @RequestMapping("/getTripDeals")

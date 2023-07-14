@@ -89,7 +89,8 @@ public class TourGuideService {
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
 	}
-
+		//TODO : JAVA CONCURRENCY
+		//TODO : 5 derniere locations
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
 		for(Attraction attraction : gpsUtil.getAttractions()) {
@@ -97,8 +98,19 @@ public class TourGuideService {
 				nearbyAttractions.add(attraction);
 			}
 		}
-		
+
 		return nearbyAttractions;
+	}
+	public VisitedLocation getUserMostRecentLocation(User user) {
+
+		// Get the user's visited locations
+		List<VisitedLocation> visitedLocations = user.getVisitedLocations();
+
+		// Get the most recent visited location
+		VisitedLocation mostRecentLocation = visitedLocations.get(visitedLocations.size() - 1);
+
+		// Return the most recent visited location
+		return mostRecentLocation;
 	}
 	
 	private void addShutDownHook() {
