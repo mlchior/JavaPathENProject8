@@ -1,12 +1,11 @@
-image: gradle:7.4.2-jdk:jdk8
+image: gradle:4.8.1-jdk8
 
 stages:
   - build
   - test
 
-
-before_script:
-  - set GRADLE_USER_HOME=`pwd`/.gradle
+variables:
+  GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.gradle"
 
 cache:
   paths:
@@ -22,4 +21,3 @@ test:
   stage: test
   script:
     - gradle test
-
