@@ -17,8 +17,14 @@ build:
   stage: build
   script:
     - gradle build
+  artifacts:
+    paths:
+      - build/libs/*.jar
+  only:
+    - main
+
 
 test:
   stage: test
   script:
-    - gradle test
+    - gradle jacocoTestReport
