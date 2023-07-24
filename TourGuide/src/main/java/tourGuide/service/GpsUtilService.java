@@ -20,7 +20,7 @@ public class GpsUtilService {
 
     private GpsUtil gpsUtil;
 
-    private ExecutorService executor = Executors.newFixedThreadPool(1000);
+    private ExecutorService executor = Executors.newFixedThreadPool(10000);
 
     public GpsUtilService() {
         gpsUtil = new GpsUtil();

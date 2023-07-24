@@ -32,7 +32,7 @@ public class RewardsService {
 
 	private int attractionProximityRange = 200;
 
-	private ExecutorService executor = Executors.newFixedThreadPool(1000);
+	private ExecutorService executor = Executors.newFixedThreadPool(10000);
 	private final GpsUtilService gpsUtil;
 	private final RewardCentral rewardsCentral;
 	/**

@@ -1,8 +1,10 @@
-image: gradle:4.8.1-jdk8
-
+image: java:8-jdk
+before_script:
+  - cd TourGuide
 stages:
   - build
   - test
+
 
 variables:
   GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.gradle"
@@ -16,7 +18,7 @@ cache:
 build:
   stage: build
   script:
-    - gradle build
+    - ./gradlew assemble
   artifacts:
     paths:
       - build/libs/*.jar
@@ -27,4 +29,4 @@ build:
 test:
   stage: test
   script:
-    - gradle jacocoTestReport
+    - ./gradlew test
