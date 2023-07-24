@@ -1,0 +1,32 @@
+image: java:8-jdk
+before_script:
+  - cd TourGuide
+stages:
+  - build
+  - test
+
+
+variables:
+  GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.gradle"
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+
+build:
+  stage: build
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+  only:
+    - main
+
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
