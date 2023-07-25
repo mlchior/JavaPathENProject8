@@ -1,8 +1,10 @@
 package tourGuide;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import gpsUtil.location.Location;
 import org.junit.Test;
 
 import gpsUtil.location.VisitedLocation;
@@ -108,6 +110,7 @@ public class TestTourGuideService {
 
 		assertEquals(5, nearbyAttractions.size());
 	}
+
 
 	@Test
 	public void getTripDeals() {
